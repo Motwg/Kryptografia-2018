@@ -28,7 +28,7 @@ int main()
     bl.Wyswietl_bin();
     cout<<bitset<8>('a'<<2)<<endl;
     cout<<bitset<8>(('a'<<2)>>2)<<endl;
-    delete w;
+
     return 0;
 }
 
