@@ -14,6 +14,7 @@ class blok
         blok(blok*);            //tworzy kopie bloku
         ~blok();
 
+        char Zwroc_bajt(unsigned n);                      //zwraca bajt na n-tej pozycji, n e <0,7>
         bool Wartosc_bitu(unsigned int n);                //zwraca wartosc bitu na n-tej pozycji, n e <0,63>
         void Zmien_bit(unsigned int n);                     //zmienia bit na n-tej pozycji
         void Zamien_bity_miejscami(unsigned int n, unsigned int m); //zamienia bity na n-tej i m-tej pozycjach

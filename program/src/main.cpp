@@ -22,6 +22,7 @@ int main()
     blokA.Wyswietl_bin();
     blokA.Permutacja_poczatkowa();
     blokA.Wyswietl_bin();
+    cout<<endl<<bitset<8>(blokA.Zwroc_bajt(3))<<endl;
 
     return 0;
 }

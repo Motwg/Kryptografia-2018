@@ -18,6 +18,11 @@ blok::~blok()
     bajt=NULL;
 }
 
+char blok::Zwroc_bajt(unsigned n)
+{
+    return *(bajt+n);
+}
+
 bool blok::Wartosc_bitu(unsigned int pozycja)
 {
     if( (*(bajt+pozycja/8)) & (1<<(7-pozycja%8)) )
