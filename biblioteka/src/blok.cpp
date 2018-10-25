@@ -69,12 +69,25 @@ blok & blok::operator<<(unsigned int n)
 }
 
 
+blok::blok(blok *A)
+{
+
+    this->bajt=new char [8];
+    for(int i=0;i<8;i++)
+        this->bajt[i]=0;
+    for(int i=0;i<8 && A->bajt[i]!=0;i++)
+        this->bajt[i]=A->bajt[i];
+}
+
+
 void blok::Permutacja_poczatkowa()
 {
+blok Temp(this);
 for(int k=0;k<2;k++)
     for(int j=0;j<4;j++)
         for(int i=0;i<8;i++)
-            Zamien_bity_miejscami(i,57-i*8+j*2-k);
+            if( Wartosc_bitu(k*32+j*8+i) != Temp.Wartosc_bitu(57-i*8+j*2-k) )
+                this->Zmien_bit(k*32+j*8+i);
 }
 
 

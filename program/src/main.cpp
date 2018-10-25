@@ -10,24 +10,18 @@ int main()
 {
     srand(time(NULL));
 
-    char *tekst_jawny="\3\7\1\1\1\1\1\3\0a12857128";
+    char *tekst_jawny="\3\7\1\1\0a12857128";
     char *w =&tekst_jawny[0];
-    blok bl(w);
-
+    blok blokA(w);
+    //blok blokB(&blokA);  // przykład kopiowania blokuA do blokuB
     blok klucz=generuj_klucz();
 
     cout<<"Klucz: "<<endl;
     klucz.Wyswietl_bin();
     cout<<"Start: "<<endl;
-    bl.Wyswietl_bin();
-   // bl.Permutacja_poczatkowa();
-   // bl.Wyswietl_bin();
-   // bl<<6;
-   // bl.Wyswietl_bin();
-    bl<<2;
-    bl.Wyswietl_bin();
-    cout<<bitset<8>('a'<<2)<<endl;
-    cout<<bitset<8>(('a'<<2)>>2)<<endl;
+    blokA.Wyswietl_bin();
+    blokA.Permutacja_poczatkowa();
+    blokA.Wyswietl_bin();
 
     return 0;
 }
