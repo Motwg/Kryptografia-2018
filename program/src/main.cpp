@@ -11,14 +11,24 @@ int main()
     srand(time(NULL));
 
     char *tekst_jawny="\3\1\0a12857128";
-    blok A(&tekst_jawny[0]);
-    blok B;
+    blok L(&tekst_jawny[0]);
+    blok P(&L);
+    L.Wyswietl_bin();
+    P.Wyswietl_bin();
+    (L>>32)<<32;
+    (P<<32);
+    L.Wyswietl_bin();
+    P.Wyswietl_bin();
 
+    blok A(&tekst_jawny[0]);
     A.Wyswietl_bin();
     A.Permutacja_poczatkowa();
     A.Wyswietl_bin();
     A.Permutacja_koncowa();
     A.Wyswietl_bin();
+    A.Przesun_w_lewo(8,32);
+    A.Wyswietl_bin();
+
 
 //blok B(&A);  // przykład kopiowania bloku A do bloku B
 

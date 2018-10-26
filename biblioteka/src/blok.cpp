@@ -65,6 +65,12 @@ void blok::Zmien_bit(unsigned int pozycja)
     (*(bajt+pozycja/8)) = (*(bajt+pozycja/8)) xor (1<<(7-pozycja%8));
 }
 
+void blok::Zmien_bit_na(unsigned int n1, blok B, unsigned int n2)
+{
+    if( Wartosc_bitu(n1) != B.Wartosc_bitu(n2) )
+        Zmien_bit(n1);
+}
+
 void blok::Zamien_bity_miejscami(unsigned int a, unsigned int b)
 {
     bool temp=Wartosc_bitu(a);
@@ -74,6 +80,31 @@ void blok::Zamien_bity_miejscami(unsigned int a, unsigned int b)
             Zmien_bit(b);
         }
 }
+
+void blok::Przesun_w_lewo(unsigned int n, unsigned int m)
+{
+bool Temp;
+    for(int i=0;i<m;i++)
+        {
+            Temp=Wartosc_bitu(0);
+            *(this)<<1;
+            if(  Wartosc_bitu(n-1) != Temp)
+                Zmien_bit(n-1);
+        }
+}
+
+void blok::Przesun_w_prawo(unsigned int n, unsigned int m)
+{
+bool Temp;
+    for(int i=0;i<m;i++)
+        {
+            Temp=Wartosc_bitu(n-1);
+            *(this)>>1;
+            if(  Wartosc_bitu(0) != Temp)
+                Zmien_bit(0);
+        }
+}
+
 
 blok & blok::operator>>(unsigned int n)
 {
@@ -102,6 +133,7 @@ blok & blok::operator<<(unsigned int n)
         }
     return * this;
 }
+
 
 blok & blok::operator>(unsigned int n)
 {
@@ -175,8 +207,7 @@ blok Temp(this);               //<== z jakiegoś powodu tu działa tylko w taki 
 for(int k=0;k<2;k++)
     for(int j=0;j<4;j++)
         for(int i=0;i<8;i++)
-            if( Wartosc_bitu(k*32+j*8+i) != Temp.Wartosc_bitu(57-i*8+j*2-k) )
-                this->Zmien_bit(k*32+j*8+i);
+            Zmien_bit_na(k*32+j*8+i,Temp,57-i*8+j*2-k);
 }
 
 void blok::Permutacja_koncowa()
@@ -186,10 +217,8 @@ blok *Temp=new blok;              //<== z jakiegoś powodu tu działa tylko w ta
 for(int j=0;j<8;j++)
     for(int i=0;i<4;i++)
         {
-        if( Wartosc_bitu(j*8+i*2) != Temp->Wartosc_bitu(39+8*i-j) )
-            this->Zmien_bit(j*8+i*2);
-        if( Wartosc_bitu(j*8+i*2+1) != Temp->Wartosc_bitu(7+8*i-j) )
-            this->Zmien_bit(j*8+i*2+1);
+        Zmien_bit_na(j*8+i*2,*Temp,39+8*i-j);
+        Zmien_bit_na(j*8+i*2+1,*Temp,7+8*i-j);
         }
 delete Temp;
 }
