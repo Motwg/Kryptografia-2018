@@ -4,6 +4,14 @@
 
 using namespace std;
 
+blok::blok()
+{
+    bajt=new char [8];
+    for(int i=0;i<8;i++)
+        *(bajt+i)=0;
+}
+
+
 blok::blok(char *wsk)
 {
     bajt=new char [8];
@@ -13,10 +21,27 @@ blok::blok(char *wsk)
         *(bajt+i)=*(wsk+i);
 }
 
+
 blok::~blok()
 {
     bajt=NULL;
 }
+
+void blok::generuj_klucz()
+{
+    char* slowo=new char [8];
+    for(int i=0;i<8;i++)
+        {
+        *(slowo+i)=rand()%256;                     //generowanie bajtów klucza
+
+        bitset<8>a=( *(slowo+i) );
+        if(a.count()%2)                          //kontrola parzystości
+            (*(slowo+i)) = (*(slowo+i)) xor 1;  //dobranie odpowiednio ostatniego bitu
+        }
+    blok A(slowo);
+    *this=A;
+}
+
 
 char blok::Zwroc_bajt(unsigned n)
 {
@@ -112,6 +137,27 @@ blok & blok::operator+=(blok A)
     return * this;
 }
 
+blok blok::operator+(blok A)
+{
+    blok B;
+    for(int i=0;i<8;i++)
+    {
+        B.bajt[i]+=A.bajt[i];
+        B.bajt[i]+=bajt[i];
+    }
+    return B;
+}
+
+
+blok & blok::operator=(blok A)
+{
+    for(int i=0;i<8;i++)
+        this->Zmien_bajt(i,'\0');
+    *this+=A;
+    return * this;
+}
+
+
 blok::blok(blok *A)
 {
 
@@ -125,13 +171,29 @@ blok::blok(blok *A)
 
 void blok::Permutacja_poczatkowa()
 {
-blok Temp(this);
+blok Temp(this);               //<== z jakiegoś powodu tu działa tylko w taki sposób
 for(int k=0;k<2;k++)
     for(int j=0;j<4;j++)
         for(int i=0;i<8;i++)
             if( Wartosc_bitu(k*32+j*8+i) != Temp.Wartosc_bitu(57-i*8+j*2-k) )
                 this->Zmien_bit(k*32+j*8+i);
 }
+
+void blok::Permutacja_koncowa()
+{
+blok *Temp=new blok;              //<== z jakiegoś powodu tu działa tylko w taki sposób
+*Temp=*this;
+for(int j=0;j<8;j++)
+    for(int i=0;i<4;i++)
+        {
+        if( Wartosc_bitu(j*8+i*2) != Temp->Wartosc_bitu(39+8*i-j) )
+            this->Zmien_bit(j*8+i*2);
+        if( Wartosc_bitu(j*8+i*2+1) != Temp->Wartosc_bitu(7+8*i-j) )
+            this->Zmien_bit(j*8+i*2+1);
+        }
+delete Temp;
+}
+
 
 
 void blok::Wyswietl()

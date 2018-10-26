@@ -5,6 +5,6 @@
 #include <blok.h>
 
 
-blok generuj_klucz();
+blok generuj_klucz();       //tworzy blok generujący klucz
 
 #endif // FUNKCJE_H
