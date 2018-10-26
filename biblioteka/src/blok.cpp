@@ -23,6 +23,11 @@ char blok::Zwroc_bajt(unsigned n)
     return *(bajt+n);
 }
 
+void blok::Zmien_bajt(unsigned n, char znak)
+{
+    *(bajt+n)=znak;
+}
+
 bool blok::Wartosc_bitu(unsigned int pozycja)
 {
     if( (*(bajt+pozycja/8)) & (1<<(7-pozycja%8)) )
@@ -73,6 +78,39 @@ blok & blok::operator<<(unsigned int n)
     return * this;
 }
 
+blok & blok::operator>(unsigned int n)
+{
+    bool Temp;
+    for(int i=0;i<n;i++)
+    {
+        Temp=Wartosc_bitu(63);
+        *this>>1;
+        if(this->Wartosc_bitu(0) != Temp)
+            Zmien_bit(0);
+    }
+    return * this;
+}
+
+
+blok & blok::operator<(unsigned int n)
+{
+    bool Temp;
+    for(int i=0;i<n;i++)
+    {
+        Temp=Wartosc_bitu(0);
+        *this<<1;
+        if(this->Wartosc_bitu(63) != Temp)
+            Zmien_bit(63);
+    }
+    return * this;
+}
+
+blok & blok::operator+=(blok A)
+{
+    for(int i=0;i<8;i++)
+        *(bajt+i)+=A.bajt[i];
+    return * this;
+}
 
 blok::blok(blok *A)
 {
