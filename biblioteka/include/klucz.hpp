@@ -7,10 +7,11 @@
 class klucz
 {
 private:
-    blok kluczPC1 // przechowóje klucz główny po permutacji PC1
+    blok *kluczPC1; // przechowóje klucz główny po permutacji PC1
 
 public:
     klucz();
+    ~klucz();
     blok kluczRundy( int nr ); // Generuje klucz rundy
 };
 

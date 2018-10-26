@@ -5,7 +5,7 @@
 
 class blok
 {
-    private:
+    protected:
         char *bajt;             //8 bajtów
 
 
