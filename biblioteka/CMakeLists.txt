@@ -4,8 +4,9 @@ project(Biblioteka)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
-        src/blok.cpp
-	src/funkcje.cpp)
+    src/blok.cpp
+    src/klucz.cpp
+	  src/funkcje.cpp)
 
 add_library(Biblioteka ${SOURCE_FILES})
 
