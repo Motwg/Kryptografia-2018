@@ -84,6 +84,7 @@ void blok::Zamien_bity_miejscami(unsigned int a, unsigned int b)
 void blok::Przesun_w_lewo(unsigned int n, unsigned int m)
 {
 bool Temp;
+blok Tblk(this);
     for(int i=0;i<m;i++)
         {
             Temp=Wartosc_bitu(0);
@@ -91,11 +92,15 @@ bool Temp;
             if(  Wartosc_bitu(n-1) != Temp)
                 Zmien_bit(n-1);
         }
+    for(int i=0;i<64;i++)
+        if(i>=n)
+            Zmien_bit_na(i,Tblk,i);
 }
 
 void blok::Przesun_w_prawo(unsigned int n, unsigned int m)
 {
 bool Temp;
+blok Tblk(this);
     for(int i=0;i<m;i++)
         {
             Temp=Wartosc_bitu(n-1);
@@ -103,6 +108,9 @@ bool Temp;
             if(  Wartosc_bitu(0) != Temp)
                 Zmien_bit(0);
         }
+    for(int i=0;i<64;i++)
+        if(i>=n)
+            Zmien_bit_na(i,Tblk,i);
 }
 
 
