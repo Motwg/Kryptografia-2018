@@ -84,7 +84,7 @@ void blok::Zamien_bity_miejscami(unsigned int a, unsigned int b)
 void blok::Przesun_w_lewo(unsigned int n, unsigned int m)
 {
 bool Temp;
-    for(int i=0;i<m;i++)
+    for(int i=0 ; i<m ; i++ )
         {
             Temp=Wartosc_bitu(0);
             *(this)<<1;

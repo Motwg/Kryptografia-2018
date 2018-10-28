@@ -1,7 +1,8 @@
 #include <bitset>
 #include <time.h>
 #include <funkcje.h>
-
+#include <klucz.hpp>
+#include <iostream> 
 
 using namespace std;
 
@@ -9,26 +10,32 @@ using namespace std;
 int main()
 {
     srand(time(NULL));
-
+    cout << "          1111111 11122222 22222333 33333334 44444444 45555555 55566666" << endl
+         << "12345678 90123456 78901234 56789012 34567890 12345678 90123456 78901234" << endl << endl;
+    
     char *tekst_jawny="\3\1\0a12857128";
-    blok L(&tekst_jawny[0]);
-    blok P(&L);
-    L.Wyswietl_bin();
-    P.Wyswietl_bin();
-    (L>>32)<<32;
-    (P<<32);
-    L.Wyswietl_bin();
-    P.Wyswietl_bin();
+   
+    blok A;
+    A.generuj_klucz();
+    A.Wyswietl_bin();
+    for(int i=0;i<10;i++){
+    A.Przesun_w_lewo(8,1);
+    A.Wyswietl_bin();}
 
-    blok A(&tekst_jawny[0]);
-    A.Wyswietl_bin();
-    A.Permutacja_poczatkowa();
-    A.Wyswietl_bin();
-    A.Permutacja_koncowa();
-    A.Wyswietl_bin();
-    A.Przesun_w_lewo(8,32);
-    A.Wyswietl_bin();
+   
+    //klucz key;
+    //key.k64().Wyswietl_bin();
+    //key.kPC1().Wyswietl_bin();
+    //for( int i=1 ; i<=16 ; i++ )
+    //    key.kluczRundy(16).Wyswietl_bin();
 
+   /* blok A, B;
+    A.generuj_klucz();
+    for( int i=0 ; i<64 ; i++ )
+        B.Zmien_bit_na( i , A , 63-i );
+
+    A.Wyswietl_bin();
+    B.Wyswietl_bin();*/
 
 //blok B(&A);  // przykład kopiowania bloku A do bloku B
 
@@ -66,5 +73,6 @@ int main()
     klucz=generuj_klucz();
     klucz.Wyswietl_bin();
 */
+    system("PAUSE");
     return 0;
 }
