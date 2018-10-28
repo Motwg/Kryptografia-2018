@@ -4,7 +4,7 @@
 class blok
 {
     protected:
-        char *bajt;             //8 bajtów
+        char *bajt;             //8 bajtów 
 
     public:
         blok();                 //tworzy blok wypełniony zerami
