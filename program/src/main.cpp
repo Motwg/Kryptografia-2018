@@ -10,30 +10,30 @@ int main()
 {
     srand(time(NULL));
 
-    char *tekst_jawny="\3\1\0a12857128";
-    blok L(&tekst_jawny[0]);
-    blok P(&L);
-    L.Wyswietl_bin();
-    P.Wyswietl_bin();
-    (L>>32)<<32;
-    (P<<32);
-    L.Wyswietl_bin();
-    P.Wyswietl_bin();
+    char *tekst_jawny="\3\1\7\7\7\3\0a12857128";
+    algorytmDES(tekst_jawny);
 
+//Test przesuwania z zapętleniem
+/*
+cout<<"Start: "<<endl;
     blok A(&tekst_jawny[0]);
     A.Wyswietl_bin();
-    A.Permutacja_poczatkowa();
+    A.Przesun_w_lewo(7,3);
     A.Wyswietl_bin();
-    A.Permutacja_koncowa();
+    A.Przesun_w_lewo(7,3);
     A.Wyswietl_bin();
-    A.Przesun_w_lewo(8,32);
+    A.Przesun_w_lewo(7,3);
     A.Wyswietl_bin();
-
-
-//blok B(&A);  // przykład kopiowania bloku A do bloku B
+    A.Przesun_w_lewo(7,3);
+    A.Wyswietl_bin();
+    A.Przesun_w_prawo(7,3);
+    A.Wyswietl_bin();
+*/
 
 //Test działania na blokach
 /*
+    blok A(&tekst_jawny[0]);
+    blok B(&A);                 // przykład kopiowania bloku A do bloku B
     cout<<"Start: "<<endl;
     A.Wyswietl_bin();
     B.Wyswietl_bin();
@@ -58,6 +58,10 @@ int main()
     A.Wyswietl_bin();
     B.Wyswietl_bin();
     C.Wyswietl_bin();
+*/
+
+//  Test tworzenia klucza
+/*
     cout<<"Tworzę klucz: "<<endl;
     blok klucz;
     klucz.generuj_klucz();
