@@ -6,7 +6,7 @@ using namespace std;
 
 blok::blok()
 {
-    bajt=new char [8];
+    bajt=new char[8];
     for(int i=0;i<8;i++)
         *(bajt+i)=0;
 }
@@ -231,7 +231,16 @@ for(int j=0;j<8;j++)
 delete Temp;
 }
 
-
+void blok::Permutacja_rozszerzajaca()
+{
+blok *Temp=new blok;
+*Temp=*this;
+for(int i=0;i<8;i++)
+    for(int j=0; j<6; j++)
+        //cout<<i*6+j+1<<" => "<<((31+i*6+j-2*i)%32 +1)<<endl;
+        Zmien_bit_na(i*6+j, *Temp, ((31+i*6+j-2*i)%32 ));
+delete Temp;
+}
 
 void blok::Wyswietl()
 {

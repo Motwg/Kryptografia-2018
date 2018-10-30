@@ -16,10 +16,12 @@ blok generuj_klucz()
 char* algorytmDES(char* tekst_jawny)
 {
     blok L(&tekst_jawny[0]);
+    L.Permutacja_poczatkowa()
     blok P(&L);
     (L>>32)<<32;
     (P<<32);
-    cout<<"L0: ";    L.Wyswietl_bin();
+    P.Permutacja_rozszerzajaca();
     cout<<"P0: ";    P.Wyswietl_bin();
+    cout<<"L0: ";    L.Wyswietl_bin();
     return "/0";
 }

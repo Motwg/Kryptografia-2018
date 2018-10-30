@@ -35,6 +35,7 @@ class blok
 
         void Permutacja_poczatkowa();
         void Permutacja_koncowa();
+        void Permutacja_rozszerzajaca();
 
         void Wyswietl();
         void Wyswietl_bin();

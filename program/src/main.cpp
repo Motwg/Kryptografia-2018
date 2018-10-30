@@ -10,7 +10,7 @@ int main()
 {
     srand(time(NULL));
 
-    char *tekst_jawny="\3\1\7\7\7\3\0a12857128";
+    char *tekst_jawny="\1\1\1\1\1\3\7\0a12857128";
     algorytmDES(tekst_jawny);
 
 //Test przesuwania z zapętleniem
