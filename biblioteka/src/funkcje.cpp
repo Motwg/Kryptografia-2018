@@ -13,15 +13,14 @@ blok generuj_klucz()
     return klucz;
 }
 
-char* algorytmDES(char* tekst_jawny)
+void pokazBit( unsigned int n )
 {
-    blok L(&tekst_jawny[0]);
-    L.Permutacja_poczatkowa()
-    blok P(&L);
-    (L>>32)<<32;
-    (P<<32);
-    P.Permutacja_rozszerzajaca();
-    cout<<"P0: ";    P.Wyswietl_bin();
-    cout<<"L0: ";    L.Wyswietl_bin();
-    return "/0";
+    for( int i=0 ; i<n-1 ; i++ )
+    {
+        std::cout << ' ';
+        if( i%8 == 0 && i != 0 ) std::cout << ' ';
+    }
+    std::cout << "^\n";
 }
+
+void separator() { std::cout << "-----------------------------------------------------------------------" << endl; }

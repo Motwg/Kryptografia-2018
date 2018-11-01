@@ -1,7 +1,8 @@
 #include <bitset>
 #include <time.h>
 #include <funkcje.h>
-
+#include <klucz.hpp>
+#include <iostream> 
 
 using namespace std;
 
@@ -9,31 +10,35 @@ using namespace std;
 int main()
 {
     srand(time(NULL));
+    cout << "          1111111 11122222 22222333 33333334 44444444 45555555 55566666" << endl
+         << "12345678 90123456 78901234 56789012 34567890 12345678 90123456 78901234" << endl << endl;
+    
+    const char *tekst_jawny="\3\1\0a12857128";
+   
+    blok A;
+    klucz k;
+    k.kluczRundy(1);
+    
 
-    char *tekst_jawny="\1\1\1\1\1\3\7\0a12857128";
-    algorytmDES(tekst_jawny);
+   
+    //klucz key;
+    //key.k64().Wyswietl_bin();
+    //key.kPC1().Wyswietl_bin();
+    //for( int i=1 ; i<=16 ; i++ )
+    //    key.kluczRundy(16).Wyswietl_bin();
 
-//Test przesuwania z zapętleniem
-/*
-cout<<"Start: "<<endl;
-    blok A(&tekst_jawny[0]);
+   /* blok A, B;
+    A.generuj_klucz();
+    for( int i=0 ; i<64 ; i++ )
+        B.Zmien_bit_na( i , A , 63-i );
+
     A.Wyswietl_bin();
-    A.Przesun_w_lewo(7,3);
-    A.Wyswietl_bin();
-    A.Przesun_w_lewo(7,3);
-    A.Wyswietl_bin();
-    A.Przesun_w_lewo(7,3);
-    A.Wyswietl_bin();
-    A.Przesun_w_lewo(7,3);
-    A.Wyswietl_bin();
-    A.Przesun_w_prawo(7,3);
-    A.Wyswietl_bin();
-*/
+    B.Wyswietl_bin();*/
+
+//blok B(&A);  // przykład kopiowania bloku A do bloku B
 
 //Test działania na blokach
 /*
-    blok A(&tekst_jawny[0]);
-    blok B(&A);                 // przykład kopiowania bloku A do bloku B
     cout<<"Start: "<<endl;
     A.Wyswietl_bin();
     B.Wyswietl_bin();
@@ -58,10 +63,6 @@ cout<<"Start: "<<endl;
     A.Wyswietl_bin();
     B.Wyswietl_bin();
     C.Wyswietl_bin();
-*/
-
-//  Test tworzenia klucza
-/*
     cout<<"Tworzę klucz: "<<endl;
     blok klucz;
     klucz.generuj_klucz();
