@@ -13,14 +13,12 @@ int main()
     cout << "          1111111 11122222 22222333 33333334 44444444 45555555 55566666" << endl
          << "12345678 90123456 78901234 56789012 34567890 12345678 90123456 78901234" << endl << endl;
     
-    char *tekst_jawny="\3\1\0a12857128";
+    const char *tekst_jawny="\3\1\0a12857128";
    
     blok A;
-    A.generuj_klucz();
-    A.Wyswietl_bin();
-    for(int i=0;i<10;i++){
-    A.Przesun_w_lewo(8,1);
-    A.Wyswietl_bin();}
+    klucz k;
+    k.kluczRundy(1);
+    
 
    
     //klucz key;
@@ -73,6 +71,5 @@ int main()
     klucz=generuj_klucz();
     klucz.Wyswietl_bin();
 */
-    system("PAUSE");
     return 0;
 }

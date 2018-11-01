@@ -4,7 +4,7 @@
 class blok
 {
     protected:
-        char *bajt;             //8 bajtów 
+        char *bajt;             //8 bajtów
 
     public:
         blok();                 //tworzy blok wypełniony zerami
@@ -35,6 +35,7 @@ class blok
 
         void Permutacja_poczatkowa();
         void Permutacja_koncowa();
+        void Permutacja_rozszerzajaca();
 
         void Wyswietl();
         void Wyswietl_bin();

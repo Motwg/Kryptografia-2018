@@ -3,7 +3,17 @@
 klucz::klucz()
 {
     klucz64.generuj_klucz();
-        
+    PC1();  
+}
+
+klucz::klucz( blok k64 )
+{
+    klucz64 = k64;
+    PC1();  
+}
+
+void klucz::PC1()
+{       
     int nr1 = 0;
     int nr2 = 28;
     int i1, i2 ,k1 ,k2;
@@ -22,7 +32,7 @@ klucz::klucz()
         kluczPC1.Zmien_bit_na( nr2++ , klucz64, i2-1 );
     }
 
-    kluczPC1.Zmien_bajt(7,'\0');        
+    kluczPC1.Zmien_bajt(7,'\0');   
 }
 
 
@@ -41,17 +51,19 @@ blok klucz::kluczRundy(int runda)
             case 9:
             case 16:
             pozycje = 1;
+            break;
             default:
             pozycje = 2;
         }
-        //separator();
-        tmp.Przesun_w_lewo( 28 , 1 );
-        //tmp.Wyswietl_bin();
-        tmp.Przesun_w_lewo( 56 , 28 );
-        //tmp.Wyswietl_bin();
-        tmp.Przesun_w_lewo( 28 , 1 );
-        //tmp.Wyswietl_bin();
-        tmp.Przesun_w_lewo( 56 , 28 );
+        tmp.Wyswietl_bin();
+        separator();
+        tmp.Przesun_w_lewo( 28 , pozycje );
+        tmp.Wyswietl_bin();
+        tmp < 28;
+        tmp.Wyswietl_bin();
+        tmp.Przesun_w_lewo( 28 , pozycje );
+        tmp.Wyswietl_bin();
+        tmp > 28;
         tmp.Wyswietl_bin();
     }
     // Permutacja PC2
@@ -68,7 +80,6 @@ blok klucz::kluczRundy(int runda)
     {
         kluczPC2.Zmien_bit_na( i , tmp , nr[i]-1 );
     }
-
-    kluczPC2.Zmien_bajt(6,'\0');
+    kluczPC2.Wyswietl_bin();
     return kluczPC2;
 }

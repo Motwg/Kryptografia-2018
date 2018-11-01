@@ -6,7 +6,7 @@ using namespace std;
 
 blok::blok()
 {
-    bajt=new char [8];
+    bajt=new char[8];
     for(int i=0;i<8;i++)
         *(bajt+i)=0;
 }
@@ -84,18 +84,23 @@ void blok::Zamien_bity_miejscami(unsigned int a, unsigned int b)
 void blok::Przesun_w_lewo(unsigned int n, unsigned int m)
 {
 bool Temp;
-    for(int i=0 ; i<m ; i++ )
+blok Tblk(this);
+    for(int i=0;i<m;i++)
         {
             Temp=Wartosc_bitu(0);
             *(this)<<1;
             if(  Wartosc_bitu(n-1) != Temp)
                 Zmien_bit(n-1);
         }
+    for(int i=0;i<64;i++)
+        if(i>=n)
+            Zmien_bit_na(i,Tblk,i);
 }
 
 void blok::Przesun_w_prawo(unsigned int n, unsigned int m)
 {
 bool Temp;
+blok Tblk(this);
     for(int i=0;i<m;i++)
         {
             Temp=Wartosc_bitu(n-1);
@@ -103,6 +108,9 @@ bool Temp;
             if(  Wartosc_bitu(0) != Temp)
                 Zmien_bit(0);
         }
+    for(int i=0;i<64;i++)
+        if(i>=n)
+            Zmien_bit_na(i,Tblk,i);
 }
 
 
@@ -223,7 +231,16 @@ for(int j=0;j<8;j++)
 delete Temp;
 }
 
-
+void blok::Permutacja_rozszerzajaca()
+{
+blok *Temp=new blok;
+*Temp=*this;
+for(int i=0;i<8;i++)
+    for(int j=0; j<6; j++)
+        //cout<<i*6+j+1<<" => "<<((31+i*6+j-2*i)%32 +1)<<endl;
+        Zmien_bit_na(i*6+j, *Temp, ((31+i*6+j-2*i)%32 ));
+delete Temp;
+}
 
 void blok::Wyswietl()
 {
