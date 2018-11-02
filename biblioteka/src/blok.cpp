@@ -22,10 +22,7 @@ blok::blok(char *wsk)
 }
 
 
-blok::~blok()
-{
-    bajt=NULL;
-}
+blok::~blok()   {bajt=NULL;}
 
 void blok::generuj_klucz()
 {
@@ -92,9 +89,8 @@ blok Tblk(this);
             if(  Wartosc_bitu(n-1) != Temp)
                 Zmien_bit(n-1);
         }
-    for(int i=0;i<64;i++)
-        if(i>=n)
-            Zmien_bit_na(i,Tblk,i);
+    for(int i=n;i<64;i++)
+        Zmien_bit_na(i,Tblk,i);
 }
 
 void blok::Przesun_w_prawo(unsigned int n, unsigned int m)
@@ -108,9 +104,8 @@ blok Tblk(this);
             if(  Wartosc_bitu(0) != Temp)
                 Zmien_bit(0);
         }
-    for(int i=0;i<64;i++)
-        if(i>=n)
-            Zmien_bit_na(i,Tblk,i);
+    for(int i=n;i<64;i++)
+        Zmien_bit_na(i,Tblk,i);
 }
 
 
@@ -203,15 +198,13 @@ blok::blok(blok *A)
 
     this->bajt=new char [8];
     for(int i=0;i<8;i++)
-        this->bajt[i]=0;
-    for(int i=0;i<8 && A->bajt[i]!=0;i++)
         this->bajt[i]=A->bajt[i];
 }
 
 
 void blok::Permutacja_poczatkowa()
 {
-blok Temp(this);               //<== z jakiegoś powodu tu działa tylko w taki sposób
+blok Temp(this);
 for(int k=0;k<2;k++)
     for(int j=0;j<4;j++)
         for(int i=0;i<8;i++)
@@ -220,15 +213,13 @@ for(int k=0;k<2;k++)
 
 void blok::Permutacja_koncowa()
 {
-blok *Temp=new blok;              //<== z jakiegoś powodu tu działa tylko w taki sposób
-*Temp=*this;
+blok Temp(this);
 for(int j=0;j<8;j++)
     for(int i=0;i<4;i++)
         {
-        Zmien_bit_na(j*8+i*2,*Temp,39+8*i-j);
-        Zmien_bit_na(j*8+i*2+1,*Temp,7+8*i-j);
+        Zmien_bit_na(j*8+i*2,Temp,39+8*i-j);
+        Zmien_bit_na(j*8+i*2+1,Temp,7+8*i-j);
         }
-delete Temp;
 }
 
 void blok::Permutacja_rozszerzajaca()
@@ -237,7 +228,6 @@ blok *Temp=new blok;
 *Temp=*this;
 for(int i=0;i<8;i++)
     for(int j=0; j<6; j++)
-        //cout<<i*6+j+1<<" => "<<((31+i*6+j-2*i)%32 +1)<<endl;
         Zmien_bit_na(i*6+j, *Temp, ((31+i*6+j-2*i)%32 ));
 delete Temp;
 }
