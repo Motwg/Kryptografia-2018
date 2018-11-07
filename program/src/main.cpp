@@ -11,15 +11,16 @@ int main()
 {
     srand(time(NULL));
 
-    cout << "          1111111 11122222 22222333 33333334 44444444 45555555 55566666" << endl
-         << "12345678 90123456 78901234 56789012 34567890 12345678 90123456 78901234" << endl << endl;
-
-    klucz k;
-    k.kluczRundy(1);        //<= proszę o przeniesienie tego do algorytmu DES w funkcje.h na odpowiednie miejsce jeśl już działa
-
     cout<<"Działanie algorytmu DES:"<<endl;
-    char *tekst_jawny="\1\1\1\1\1\3\7\0a12857128";
-    algorytmDES(tekst_jawny);
+    klucz Klucz;
+    //char *tekst_jawny="\1\1\1\1\1\3\7\0a12857128";
+    char *tekst_jawny="Ala ma K";
+    char *szyfrogram=algorytmDES(tekst_jawny,Klucz,false);
+    char *sprawdzenie=algorytmDES(szyfrogram,Klucz,true);
+
+    cout<<tekst_jawny<<endl
+        <<szyfrogram<<endl
+        <<sprawdzenie<<endl;
 
 //Test przesuwania z zapętleniem
 /*
@@ -66,17 +67,6 @@ cout<<"Start: "<<endl;
     A.Wyswietl_bin();
     B.Wyswietl_bin();
     C.Wyswietl_bin();
-*/
-
-//  Test tworzenia klucza
-/*
-    cout<<"Tworzę klucz: "<<endl;
-    blok klucz;
-    klucz.generuj_klucz();
-    klucz.Wyswietl_bin();
-    cout<<"Sprawdzam drugi sposób tworzenia klucza: "<<endl;
-    klucz=generuj_klucz();
-    klucz.Wyswietl_bin();
 */
     return 0;
 }

@@ -50,6 +50,11 @@ void blok::Zmien_bajt(unsigned n, char znak)
     *(bajt+n)=znak;
 }
 
+char* blok::Zwroc_bajty()
+{
+    return bajt;
+}
+
 bool blok::Wartosc_bitu(unsigned int pozycja)
 {
     if( (*(bajt+pozycja/8)) & (1<<(7-pozycja%8)) )
@@ -192,6 +197,14 @@ blok & blok::operator=(blok A)
     return * this;
 }
 
+blok blok::operator^(blok A)
+{
+    blok B;
+    for(short i=0;i<8;i++)
+        B.bajt[i]=A.bajt[i]^bajt[i];
+    return B;
+}
+
 
 blok::blok(blok *A)
 {
@@ -224,12 +237,23 @@ for(int j=0;j<8;j++)
 
 void blok::Permutacja_rozszerzajaca()
 {
-blok *Temp=new blok;
-*Temp=*this;
+blok Temp(this);
 for(int i=0;i<8;i++)
     for(int j=0; j<6; j++)
-        Zmien_bit_na(i*6+j, *Temp, ((31+i*6+j-2*i)%32 ));
-delete Temp;
+        Zmien_bit_na(i*6+j, Temp, ((31+i*6+j-2*i)%32 ));
+}
+
+void blok::Permutacja_Pblok()
+{
+blok Temp(this);
+
+int pblok [32]= {   16,	7,	20,	21,	29,	12,	28,	17,
+                    1,	15,	23,	26,	5,	18,	31,	10,
+                    2,	8,	24,	14,	32,	27,	3,	9,
+                    19,	13,	30,	6,	22,	11,	4,	25};
+
+for(short i=0;i<32;i++)
+    Zmien_bit_na(i,Temp,pblok[i]-1);
 }
 
 void blok::Wyswietl()

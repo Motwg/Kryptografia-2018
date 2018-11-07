@@ -20,6 +20,7 @@ class blok
         void Zamien_bity_miejscami(unsigned int n, unsigned int m);     //zamienia bity na n-tej i m-tej pozycjach, prawdopodobnie nieużyteczne
 
         char Zwroc_bajt(unsigned n);                         //zwraca bajt na n-tej pozycji, n e <0,7>
+        char* Zwroc_bajty();
         void Zmien_bajt(unsigned n, char znak);              //zmienia n-ty bajt na podany bajt (znak), n e <0,7>
 
         void Przesun_w_lewo(unsigned int n, unsigned int m);       //przesuwa pierwsze n pozycji w bloku w lewo/prawo
@@ -32,10 +33,12 @@ class blok
         blok &operator+=(blok A);           //Sumuje bloki i nadpisuje blok pierwszy
         blok operator+(blok A);             //Sumuje bloki bez zapisu (używać w sposób blokA=(blokB+blokC))
         blok &operator=(blok A);
+        blok operator^(blok A);            //XORuje bloki (sumuje modulo 2)
 
         void Permutacja_poczatkowa();
         void Permutacja_koncowa();
         void Permutacja_rozszerzajaca();
+        void Permutacja_Pblok();
 
         void Wyswietl();
         void Wyswietl_bin();
