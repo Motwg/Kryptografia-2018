@@ -100,7 +100,5 @@ blok klucz::kluczRundy(int runda)
         kluczPC2.Zmien_bit_na( i , tmp , nr[i]-1 );
     }
 
-    separator();
-    kluczPC2.Wyswietl_bin();
     return kluczPC2;
 }
