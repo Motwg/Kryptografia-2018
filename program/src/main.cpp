@@ -18,9 +18,9 @@ int main()
     char *szyfrogram=algorytmDES(tekst_jawny,Klucz,false);
     char *sprawdzenie=algorytmDES(szyfrogram,Klucz,true);
 
-    cout<<tekst_jawny<<endl
-        <<szyfrogram<<endl
-        <<sprawdzenie<<endl;
+    cout << "Tekst jawny: " << tekst_jawny << endl
+         << "Szyfrogram:  " << szyfrogram << endl
+         << "Sprawdzenie: " << sprawdzenie << endl;
 
 //Test przesuwania z zapętleniem
 /*
