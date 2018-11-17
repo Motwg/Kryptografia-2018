@@ -27,32 +27,31 @@ int main(int liczArg, char *arg[])
 
     vector<char> tekstJawny;
     vector<char> szyfrogram;
+    vector<blok> szyfrogramBin;
     vector<char> tekstOdszyfrowany;
 
     if( liczArg > 1 )
-    {    
+    {
         for( int i=0 ; arg[1][i]!='\0' ; i++ )
         {
             tekstJawny.push_back(arg[1][i] );
         }
     }
     else
-    {    
-        char *tmp = "Ala ma koteła";
+    {
+        char *tmp =   "Ala ma koteła";
         for( int i=0 ; tmp[i]!='\0' ; i++ )
         {
             tekstJawny.push_back( tmp[i] );
         }
-
     }
      tekstJawny.push_back('\0');
 
-    int liczbaBlokow = tekstJawny.size()/8;
-    if( tekstJawny.size()%8 != 0 ) liczbaBlokow++;
 
-    for( int i=0 ; i < liczbaBlokow ; i++ )
+    for( int i=0 ; i < (tekstJawny.size()+7)/8 ; i++ )
     {
         char jawny[8];
+       // jawny = &tekstJawny[i*8];
 
         for( int j=0 ; j < 8 ; j++ )
         {
@@ -60,29 +59,34 @@ int main(int liczArg, char *arg[])
             jawny[j] = tekstJawny[ i*8 + j ];
         }
 
-        //cout << "j: " << jawny << endl;
-        char *szyfr  = algorytmDES( jawny , klucz , false);
-        char *deszyfr= algorytmDES( szyfr , klucz , true);
-        //cout << "s: " << szyfr << endl;
-        //cout << "d: " << deszyfr << endl;
-        //cout << "---------------------------------" << endl;
 
+        char *szyfr   = algorytmDES( jawny , klucz , false);
+        char *deszyfr = algorytmDES( szyfr , klucz , true);
+        blok szyfrBin(szyfr);
+
+
+        szyfrogramBin.push_back(szyfrBin);
         for( int j=0 ; j < 8 ; j++ )
-        {   
-            if( tekstJawny[ i*8 + j ] == 0 ) break;
+        {
             szyfrogram.push_back( szyfr[j] );
+            if( tekstJawny[ i*8 + j ] == 0 ) continue;
             tekstOdszyfrowany.push_back( deszyfr[j] );
         }
     }
 
     cout << "Tekst jawny: " << tekstJawny << endl;
     cout << "Szyfrogram:  " << szyfrogram << endl;
+    for( int i=0 ; i < (int)szyfrogramBin.size() ; i++ )
+        szyfrogramBin[i].Wyswietl_bin();
     cout << "Sprawdzenie: " << tekstOdszyfrowany << endl;
 
+    tekstJawny.clear();
+    szyfrogram.clear();
+    tekstOdszyfrowany.clear();
     //vector<blok>szyfrbin;
     //char *tekst_jawny=new char[8];
 
-    /*for( int i=0 ; i<tekst.length() ; i=i+8 )
+/*for( int i=0 ; i<tekst.length() ; i=i+8 )
     {
         tekst_jawny = &tekst[i];
         blok a( tekst_jawny );
@@ -101,9 +105,9 @@ int main(int liczArg, char *arg[])
 
     for( int i=0 ; i < static_cast<int>( szyfrbin.size() ) ; i++ )
         szyfrbin[i].Wyswietl_bin();
-    
-    cout << "Sprawdzenie: " << spr << endl;
 
+    cout << "Sprawdzenie: " << spr << endl;
+*/
 
 //Test przesuwania z zapętleniem
 /*

@@ -17,7 +17,7 @@ blok::blok(char *wsk)
     bajt=new char [8];
     for(int i=0;i<8;i++)
         *(bajt+i)=0;
-    for(int i=0;i<8 && *(wsk+i)!=0;i++)
+    for(int i=0;i<8 ;i++)
         *(bajt+i)=*(wsk+i);
 }
 
