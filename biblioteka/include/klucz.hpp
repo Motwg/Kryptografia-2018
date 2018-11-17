@@ -4,7 +4,7 @@
 #include <blok.h>
 //#include <funkcje.h>
 
-class klucz
+class Klucz
 {
 public:
     blok klucz64;  // przechowuje 64 bitowy klucz główny z bitami parzystości
@@ -14,8 +14,8 @@ public:
 
 public:
     //Oba konstruktory automatycznie generują kluczPC1 z klucza64
-    klucz();                         // Sam generuje losowy klucz
-    klucz( blok k64 );                    // Przyjmuje klucz64 jako argument
+    Klucz();                         // Sam generuje losowy klucz
+    Klucz( blok k64 );                    // Przyjmuje klucz64 jako argument
 
     inline blok k64() { return klucz64; }   // zwraca klucz główny
     inline blok kPC1() { return kluczPC1; } // zwraca klucz po permutacji pc1

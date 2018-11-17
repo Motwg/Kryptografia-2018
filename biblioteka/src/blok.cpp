@@ -21,6 +21,13 @@ blok::blok(char *wsk)
         *(bajt+i)=*(wsk+i);
 }
 
+blok::blok(unsigned int tab[])
+{
+    bajt=new char [8];
+    for(int i=0;i<8;i++)
+        *(bajt+i)=tab[i];
+}
+
 
 blok::~blok()   {bajt=NULL;}
 

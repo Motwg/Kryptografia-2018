@@ -1,41 +1,22 @@
 # include "klucz.hpp"
-
+# include <iostream>
 
 void separator();
 
-klucz::klucz()
+Klucz::Klucz()
 {
     klucz64.generuj_klucz();
     PC1();
 }
 
-klucz::klucz( blok k64 )
+Klucz::Klucz( blok k64 )
 {
     klucz64 = k64;
     PC1();
 }
 
-void klucz::PC1()
+void Klucz::PC1()
 {
-/*
-    int nr1 = 0;
-    int nr2 = 28;
-    int i1, i2 ,k1 ,k2;
-
-    for( i1 = 57 , i2 = 63 ; i1 < 60 ; i1++ , i2-- )
-    {
-        for( k1 = i1 , k2 = i2 ; k1 > 0 ; k1-=8 , k2-=8 )
-        {
-            kluczPC1.Zmien_bit_na( nr1++ , klucz64, k1-1 );
-            kluczPC1.Zmien_bit_na( nr2++ , klucz64, k2-1 );
-        }
-    }
-    for ( i1 = 60 , i2 = 28 ; i2 > 0 ; i1-=8 , i2-=8  )
-    {
-        kluczPC1.Zmien_bit_na( nr1++ , klucz64, i1-1 );
-        kluczPC1.Zmien_bit_na( nr2++ , klucz64, i2-1 );
-    }
-*/
     short nr[56]= { 57,	49,	41,	33,	25,	17,	9,
                     1,	58,	50,	42,	34,	26,	18,
                     10,	2,	59,	51,	43,	35,	27,
@@ -49,9 +30,9 @@ void klucz::PC1()
 }
 
 
-blok klucz::kluczRundy(int runda)
+blok Klucz::kluczRundy(int runda)
 {
-    blok tmp(kluczPC1);
+    blok *tmp=new blok(&kluczPC1);
     blok kluczPC2;
 
     for( int i = 1 ; i <= runda ; i++)
@@ -68,20 +49,15 @@ blok klucz::kluczRundy(int runda)
             default:
             pozycje = 2;
         }
-        tmp.Wyswietl_bin();
-        separator();
+
 
         //pierwsza połowa
-        tmp.Przesun_w_lewo( 28 , pozycje );
-        tmp.Wyswietl_bin();
-        tmp < 28;
-        tmp.Wyswietl_bin();
+        tmp->Przesun_w_lewo( 28 , pozycje );
+        *tmp < 28;
 
         //druga połowa
-        tmp.Przesun_w_lewo( 28 , pozycje );
-        tmp.Wyswietl_bin();
-        tmp > 28;
-        tmp.Wyswietl_bin();
+        tmp->Przesun_w_lewo( 28 , pozycje );
+        *tmp > 28;
     }
 
 
@@ -97,8 +73,7 @@ blok klucz::kluczRundy(int runda)
 
     for( int i=0 ; i<48 ; i++ )
     {
-        kluczPC2.Zmien_bit_na( i , tmp , nr[i]-1 );
+        kluczPC2.Zmien_bit_na( i , *tmp , nr[i]-1 );
     }
-
     return kluczPC2;
 }

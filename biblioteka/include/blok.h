@@ -8,6 +8,7 @@ class blok
 
     public:
         blok();                 //tworzy blok wypełniony zerami
+        blok(unsigned int[]);
         blok(char*);            //tworzy blok z ciągu znaków
         blok(blok*);            //tworzy kopie bloku
         ~blok();

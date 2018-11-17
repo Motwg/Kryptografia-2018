@@ -10,25 +10,31 @@ blok generuj_klucz()
     return klucz;
 }
 
-char* algorytmDES(char* tekst_jawny, klucz Klucz, bool deszyfrowanie)
+char* algorytmDES(char* tekst_jawny, Klucz klucz , bool deszyfrowanie)
 {
     blok L(&tekst_jawny[0]);
-    cout<<"DES: "<<endl;    L.Wyswietl_bin();
+    return algorytmDES(L, klucz, deszyfrowanie);
+}
+
+char* algorytmDES(blok tekst_jawny, Klucz klucz , bool deszyfrowanie)
+{
+    blok L(tekst_jawny);
+//    cout<<"DES: "<<endl;    L.Wyswietl_bin();
 
     L.Permutacja_poczatkowa();
 
-    cout<<"Po Permutacji początkowej: "<<endl; L.Wyswietl_bin();
+//    cout<<"Po Permutacji początkowej: "<<endl; L.Wyswietl_bin();
 
-    separator();
+//    separator();
     blok P(&L);
     blok Temp;
 
-    blok K;
+   // blok K;
     (L>>32)<<32;                            //L zapisane na 32 bitach
     (P<<32);                                //P zapisane na 32 bitach
 
-    cout<<"P0: ";    P.Wyswietl_bin();
-    cout<<"L0: ";    L.Wyswietl_bin();
+//    cout<<"P0: ";    P.Wyswietl_bin();
+//    cout<<"L0: ";    L.Wyswietl_bin();
 
 
     short i;
@@ -40,43 +46,50 @@ char* algorytmDES(char* tekst_jawny, klucz Klucz, bool deszyfrowanie)
 
     while(i>=0 && i<16)
     {
-        separator();
-        cout<<"Runda "<<i+1<<endl;
-
-        K=Klucz.kluczRundy(i+1);                                                 // <-- sprawdzone
-        P.Permutacja_rozszerzajaca();           //rozszerzenie P do 48              <-- sprawdzone
-        P=P^K;                                  //sumowanie modulo 2 (XOR)          <-- sprawdzone
-        P=f(P);                                 //S-boxy , P zmienione do 32 bitów  <-- sprawdzone
-        P.Permutacja_Pblok();                   //permutacja wyjściowa z S-boxów    <-- sprawdzone
-
-        cout<<"K"<<i+1<<": "; K.Wyswietl_bin();
-        cout<<"P"<<i+1<<": "; P.Wyswietl_bin();
-        cout<<"L"<<i+1<<": "; L.Wyswietl_bin();
-
+//        separator();
+//        cout<<"Runda "<<i+1<<endl;
         Temp=P;
+//        cout<<"K 64"<<i+1<<": "; Klucz.k64().Wyswietl_bin();
+//        cout<<"KPC1"<<i+1<<": "; Klucz.kPC1().Wyswietl_bin();
+        //Klucz.kluczRundy(i+1);
+//        cout<<"K RU"<<i+1<<": "; Klucz.kluczRundy(i+1).Wyswietl_bin();           // <-- sprawdzone
+        P.Permutacja_rozszerzajaca();           //rozszerzenie P do 48              <-- sprawdzone
+//        cout<<"P PR"<<i+1<<": "; P.Wyswietl_bin();
+        P=P^klucz.kluczRundy(i+1);              //sumowanie modulo 2 (XOR)          <-- sprawdzone
+//        cout<<"P %2"<<i+1<<": "; P.Wyswietl_bin();
+        P=f(P);                                 //S-boxy , P zmienione do 32 bitów  <-- sprawdzone
+//        cout<<"P f "<<i+1<<": "; P.Wyswietl_bin();
+        P.Permutacja_Pblok();                   //permutacja wyjściowa z S-boxów    <-- sprawdzone
+//        cout<<"P PW"<<i+1<<": "; P.Wyswietl_bin();
+/*
+      //  cout<<"K   "<<i+1<<": "; K.Wyswietl_bin();
+        cout<<"P   "<<i+1<<": "; P.Wyswietl_bin();
+        cout<<"L   "<<i+1<<": "; L.Wyswietl_bin();
+*/
+
         P=P^L;
         L=Temp;
-
+/*
         cout<<"Po zamianie i xorowaniu/sumowaniu: "<<endl;
-        cout<<"P"<<i+1<<": "; P.Wyswietl_bin();
-        cout<<"L"<<i+1<<": "; L.Wyswietl_bin();
-
+        cout<<"P   "<<i+1<<": "; P.Wyswietl_bin();
+        cout<<"L   "<<i+1<<": "; L.Wyswietl_bin();
+*/
         if(deszyfrowanie)
             i--;
         else
             i++;
     }
 
-    separator();
-    P.Wyswietl_bin();
-    L.Wyswietl_bin();
-    P>>32;
+//    separator();
+//    P.Wyswietl_bin();
+//    L.Wyswietl_bin();
+    L>>32;
     L=L+P;
-    L.Wyswietl_bin();
+//    L.Wyswietl_bin();
 
-    separator();
+//    separator();
     L.Permutacja_koncowa();
-    cout<<"Po Permutacji końcowej: "<<endl; L.Wyswietl_bin();
+//    cout<<"Po Permutacji końcowej: "<<endl; L.Wyswietl_bin();
 
     return L.Zwroc_bajty();
 }
