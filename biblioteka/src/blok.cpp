@@ -1,6 +1,9 @@
 #include "blok.h"
+
 #include <iostream>
 #include <bitset>
+#include <random>
+#include <ctime>
 
 using namespace std;
 
@@ -31,17 +34,23 @@ blok::blok(unsigned int tab[])
 
 blok::~blok()   {bajt=NULL;}
 
-void blok::generuj_klucz()
+void blok::generuj_klucz( bool parzysty )
 {
+    static mt19937 generator(time(NULL));
+    static uniform_int_distribution<char> losuj;
+
     char* slowo=new char [8];
     for(int i=0;i<8;i++)
-        {
-        *(slowo+i)=rand()%256;                     //generowanie bajtów klucza
+    {
+        *(slowo+i)=losuj(generator);                     //generowanie bajtów klucza
 
+        if(parzysty)
+        {
         bitset<8>a=( *(slowo+i) );
         if(a.count()%2)                          //kontrola parzystości
-            (*(slowo+i)) = (*(slowo+i)) xor 1;  //dobranie odpowiednio ostatniego bitu
+            (*(slowo+i)) = (*(slowo+i)) ^ 1;  //dobranie odpowiednio ostatniego bitu
         }
+    }
     blok A(slowo);
     *this=A;
 }
@@ -71,7 +80,7 @@ bool blok::Wartosc_bitu(unsigned int pozycja)
 
 void blok::Zmien_bit(unsigned int pozycja)
 {
-    (*(bajt+pozycja/8)) = (*(bajt+pozycja/8)) xor (1<<(7-pozycja%8));
+    (*(bajt+pozycja/8)) = (*(bajt+pozycja/8)) ^ (1<<(7-pozycja%8));
 }
 
 void blok::Zmien_bit_na(unsigned int n1, blok B, unsigned int n2)

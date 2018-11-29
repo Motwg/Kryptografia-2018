@@ -13,7 +13,7 @@ class blok
         blok(blok*);            //tworzy kopie bloku
         ~blok();
 
-        void generuj_klucz();   //zmienia blok w pseudo-losowo wygenerowany klucz
+        void generuj_klucz( bool parzysty = true );   //zmienia blok w pseudo-losowo wygenerowany klucz
 
         bool Wartosc_bitu(unsigned int n);                   //zwraca wartosc bitu na n-tej pozycji, n e <0,63>
         void Zmien_bit(unsigned int n);                      //zmienia bit na n-tej pozycji, n e <0,63>
